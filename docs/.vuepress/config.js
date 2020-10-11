@@ -1,6 +1,10 @@
+const path = require('path')
+const generateSidebar = require('../../tools/generateSidebar')
+generateSidebar(path.join(__dirname,'..'),'',true)
+
 module.exports = {
     themeConfig: {
-        sidebar: 'auto',
+        sidebar: require("../sidebar"),
         nav: [
             {
                 text: '首页',
@@ -15,5 +19,8 @@ module.exports = {
     markdown: {
         lineNumbers: true
     },
-    
+    repo: 'vuejs/vuepress',
+    repoLabel: '关注github',
+    title: "Liuyl Develop Log"
 }
+
