@@ -2,7 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const VALID_DOC_FLAG = 'README.md'
 const SIDEBAR_NAME = 'sidebar.js'
+const sep = path.sep
 
+const rawJoin = path.join
+path.join = path.posix.join
 // convert "require()" -> require()
 const handleSidebarStr = function(sidebarStr) {
     const pat = /["|'](require\(.*\))["|']/g
@@ -15,6 +18,7 @@ const joinPath = function(pathA,pathB) {
     return path.join(pathA,pathB)
 }
 
+// joinRouter need't compat between unix and windows.
 const joinRouter = function(root,cur) {
     return root + '/' + cur
 }
@@ -27,7 +31,7 @@ const generateSidebar = function (curDir,root = '',debug = false) {
             generateSidebar(subdirPath,joinRouter(root,subdir))
             sidebar.push({
                 title: subdir,
-                children: `require('.\\${path.join(subdir,SIDEBAR_NAME)}')`
+                children: `require('.${sep}${path.join(subdir,SIDEBAR_NAME)}')`
             })
         } else if(subdir.endsWith('md') && subdir !== 'README.md') sidebar.push([joinRouter(root,subdir),subdir])
     })
@@ -47,5 +51,4 @@ const isValidDoc = function (docPath) {
 }
 
 module.exports = generateSidebar
-
-// generateSidebar(path.join(__dirname,'../docs'))
+path.join = rawJoin
