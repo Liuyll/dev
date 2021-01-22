@@ -1,0 +1,44 @@
+
+module.exports = [
+  [
+    "/develop/day/10-05.md",
+    "10-05.md"
+  ],
+  [
+    "/develop/day/10-18.md",
+    "10-18.md"
+  ],
+  [
+    "/develop/day/10.01.md",
+    "10.01.md"
+  ],
+  [
+    "/develop/day/10.04.md",
+    "10.04.md"
+  ],
+  [
+    "/develop/day/20-09-12.md",
+    "20-09-12.md"
+  ],
+  [
+    "/develop/day/9.21.md",
+    "9.21.md"
+  ],
+  [
+    "/develop/day/9.22.md",
+    "9.22.md"
+  ],
+  [
+    "/develop/day/9.23.md",
+    "9.23.md"
+  ],
+  [
+    "/develop/day/9.29.md",
+    "9.29.md"
+  ],
+  [
+    "/develop/day/9.30.md",
+    "9.30.md"
+  ]
+]
+    

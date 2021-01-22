@@ -6,6 +6,7 @@ const sep = path.sep
 
 const rawJoin = path.join
 path.join = path.posix.join
+const rootDocPath = path.resolve(__dirname, '../docs')
 // convert "require()" -> require()
 const handleSidebarStr = function(sidebarStr) {
     const pat = /["|'](require\(.*\))["|']/g
@@ -29,8 +30,10 @@ const generateSidebar = function (curDir,root = '',debug = false) {
         const subdirPath = joinPath(curDir,subdir)
         if(isValidDoc(subdirPath)) {
             generateSidebar(subdirPath,joinRouter(root,subdir))
+            console.log(curDir, subdir, getURLFromDistPath(curDir, subdir))
             sidebar.push({
                 title: subdir,
+                path: getURLFromDistPath(curDir, subdir),
                 children: `require('.${sep}${path.join(subdir,SIDEBAR_NAME)}')`
             })
         } else if(subdir.endsWith('md') && subdir !== 'README.md') sidebar.push([joinRouter(root,subdir),subdir])
@@ -48,6 +51,14 @@ const isValidDoc = function (docPath) {
     const files = fs.readdirSync(docPath)
 
     return files.some(file => file === VALID_DOC_FLAG) 
+}
+
+const getURLFromDistPath = (path, relativePath) => {
+    // slice rootPath/
+    path = path.slice(rootDocPath.length + 1)
+    // 如果path为空，不加后缀/号 eg: //xxx err
+    path = path.replace(sep, '/')
+    return '/' + path + (path.length ? '/' : '') + relativePath + '/'
 }
 
 module.exports = generateSidebar

@@ -1,20 +1,13 @@
 const path = require('path')
 const generateSidebar = require('../../tools/generateSidebar')
+const generateNav = require('../../tools/generateNav')
 generateSidebar(path.join(__dirname,'..'),'',true)
 
 module.exports = {
     themeConfig: {
         sidebar: require("../sidebar"),
-        nav: [
-            {
-                text: '首页',
-                link: '/'
-            },
-            {
-                text: '开发',
-                link: '/develop/'
-            }
-        ]
+        nav: generateNav(),
+        displayAllHeaders: false
     },
     markdown: {
         lineNumbers: true
