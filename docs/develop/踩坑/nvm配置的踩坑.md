@@ -16,7 +16,7 @@ npm prefix -g // 查看npm全局安装路径
 echo ${npm prefix -g} >> ~/.bashrc && source ~/.bashrc 加入环境变量即可
 ```
 
-
+1
 
 注意点：
 
